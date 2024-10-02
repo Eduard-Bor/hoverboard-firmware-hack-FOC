@@ -112,6 +112,8 @@ int16_t right_dc_curr;           // global variable for Right DC Link current
 int16_t dc_curr;                 // global variable for Total DC Link current 
 int16_t cmdL;                    // global variable for Left Command 
 int16_t cmdR;                    // global variable for Right Command 
+int16_t pwmr_prev;               // save value of pwmr on previous step (used for smothing pwmr)
+int16_t pwml_prev;               // save value of pwml on previous step (used for smothing pwml)
 
 //------------------------------------------------------------------------
 // Local variables
@@ -352,6 +354,10 @@ int main(void) {
 
 
       // ####### SET OUTPUTS (if the target change is less than +/- 100) #######
+      // add smoothing pwm output
+
+      pwmr_prev = pwmr;
+      pwml_prev = pwml; 
       #ifdef INVERT_R_DIRECTION
         pwmr = cmdR;
       #else
@@ -361,6 +367,14 @@ int main(void) {
         pwml = -cmdL;
       #else
         pwml = cmdL;
+      #endif
+
+      #ifdef VARIANT_SKATEBOARD  // add for both motors controled by one pin 
+        //cmdL = cmdR
+        //pwml = pwmr;
+        // add smoothing pwm output
+        pwmr = 0.01 * pwmr + 0.99 * pwmr_prev;
+        pwml = 0.01 * pwml + 0.99 * pwml_prev; 
       #endif
     #endif
 
