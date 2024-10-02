@@ -112,8 +112,8 @@ int16_t right_dc_curr;           // global variable for Right DC Link current
 int16_t dc_curr;                 // global variable for Total DC Link current 
 int16_t cmdL;                    // global variable for Left Command 
 int16_t cmdR;                    // global variable for Right Command 
-int16_t pwmr_prev;               // save value of pwmr on previous step (used for smothing pwmr)
-int16_t pwml_prev;               // save value of pwml on previous step (used for smothing pwml)
+int16_t pwmr_prev = 0;               // save value of pwmr on previous step (used for smothing pwmr)
+int16_t pwml_prev = 0;               // save value of pwml on previous step (used for smothing pwml)
 
 //------------------------------------------------------------------------
 // Local variables
