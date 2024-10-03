@@ -1719,7 +1719,7 @@ void smoothingFcn(int16_t pwm_prev, int16_t target_pwm, int16_t *pwm) {
     
     tmp         = CLAMP(tmp, -32768, 32767);  // Overflow protection
     *pwm = (int16_t)(tmp >> 4);        // Convert from fixed-point to int
-    *pwm = CLAMP(*pwmr, INPUT_MIN, INPUT_MAX);
+    *pwm = CLAMP(*pwm, INPUT_MIN, INPUT_MAX);
 }
 
 
