@@ -373,7 +373,8 @@ int main(void) {
         //cmdL = cmdR
         //pwml = pwmr;
         // add smoothing pwm output
-        pwmr = 0.01 * pwmr + 0.99 * pwmr_prev;
+        //pwmr = 0.01 * pwmr + 0.99 * pwmr_prev;
+        pwmr = CLAMP(pwmr, -100, 100);
         pwml = 0.01 * pwml + 0.99 * pwml_prev; 
       #endif
     #endif
